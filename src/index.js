@@ -22,7 +22,7 @@ export const applyLogic = (items, fields, fieldLookupKey) => {
    */
   const fieldLookup = {};
   fields.forEach((field) => {
-    fieldLookup[fieldLookupKey] = field;
+    fieldLookup[field[fieldLookupKey]] = field;
   });
 
   const evaluatedItems = items.map((item) => {
@@ -185,4 +185,4 @@ export const applyLogic = (items, fields, fieldLookupKey) => {
 
 }
 
-export default applyLogic;
+export default { applyLogic };
