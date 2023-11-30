@@ -1,0 +1,57 @@
+{
+  "name": "@joyfill/conditional-logic",
+  "version": "0.0.1-beta.0",
+  "description": "Conditional logic for forms",
+  "main": "dist/index.js",
+  "files": [
+    "dist/**/*",
+    "dist/*"
+  ],
+  "scripts": {
+    "clean": "rm -rf dist",
+    "build-src": "NODE_ENV=production babel src --out-dir dist --extensions '.js,.jsx' --ignore 'src/**/*.test.js','src/lib/**/*.test.js','src/**/__mocks__'",
+    "build": "npm run clean && npm run build-src",
+    "prepublish": "npm run build",
+    "publish-beta": "npm publish --tag beta",
+    "test": "jest",
+    "test-watch": "jest --watch",
+    "lint": "npx eslint ./src",
+    "lint-fix": "npx eslint ./src --fix",
+    "coverage": "jest --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joyfill/conditional-logic.git"
+  },
+  "author": "Joyfill",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joyfill/conditional-logic/issues"
+  },
+  "homepage": "https://github.com/joyfill/conditional-logic#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.12.10",
+    "@babel/core": "^7.12.10",
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
+    "@babel/plugin-transform-regenerator": "^7.12.1",
+    "@babel/plugin-transform-runtime": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.18.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.22.0",
+    "jest": "^27.0.6"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.12.1"
+  },
+  "jest": {
+    "verbose": true,
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js"
+    }
+  }
+}
