@@ -58,8 +58,6 @@ console.log(evaluatedItems[0].hidden);
 
 # Available Methods
 
----
-
 ## applyLogic(items, fields, fieldLookupKey)
 
 Evaluates the logic on each item and sets the `hidden` property to either true or false depending on if they should be shown or hidden. 
@@ -67,44 +65,6 @@ Evaluates the logic on each item and sets the `hidden` property to either true o
 - `items` - Object_Array
 - `fields` - Object_Array
 - `fieldLookupKey` - String
-
-# Hidden and Logic Evaluation Steps
-
-The goal of conditional logic evaluation is to determine if an item needs to be displayed or hidden based on a set of conditions. 
-
-Item’s passed to the library will either have `hidden: true` by default (representing hidden items) or `hidden: false|undefined` by default (representing shown items). The library will evaluate the item’s logic (if present) to determine if the value of the hidden property should be changed or left the same.
-
-Below are the steps used to determine if we should show or hide items after evaluating their logic. The show or hide action is determined by the `item.logic.action` property. 
-
-## Hidden Items (`hidden: true`)
-
-Below are the steps used to determine if we should change the hidden property to show the item (`hidden: false`) or leave an item hidden (`hidden: true`). 
-
-- **Step 1:** Is there only one item in the array of items?
-    - **Yes** - Item will be shown (`hidden: false`). Skips all other steps.
-    - **No** - Continue to step 2.
-- **Step 2:** Is there valid logic on this item?
-    - **Yes** - Continue to step 3
-    - **No** - Leave item hidden (`hidden: true`). Skip all other steps.
-- **Step 3:** Does the logic for this item have a show action (`logic.action === 'show'`)
-    - **Yes** - Continue to step 4.
-    - **No -** Leave item hidden (`hidden: true`). Skip all other steps.
-- **Step 4:** Evaluate logic conditions
-
-## Shown Items (`hidden: false|undefined`)
-
-Below are the steps used to determine if we should change the hidden property to hide the item (`hidden: true`) or leave an item shown (`hidden: false`). 
-
--**Step 1:** Is there only one item in the array of items?
-    - **Yes** - Item will be shown (`hidden: false`). Skips all other steps.
-    - **No** - Continue to step 2.
-- **Step 2:** Is there valid logic on this item?
-    - **Yes** - Continue to step 3
-    - **No** - Leave item shown (`hidden: false`). Skip all other steps.
-- **Step 3:** Does the logic for this item have a hide action (`logic.action === 'hide'`)
-    - **Yes** - Continue to step 4.
-    - **No -** Leave item shown (`hidden: false`). Skip all other steps.
-- **Step 4:** Evaluate logic conditions
 
 # Item Logic Overview
 
@@ -168,7 +128,6 @@ Below are the steps used to determine if we should change the hidden property to
 
 # Fields Overview
 
-
 ## Properties
 
 - Lookup Key - This is the property that the `logic.condition[x].field` is referencing. This must be unique per-field.
@@ -191,3 +150,43 @@ Below are the steps used to determine if we should change the hidden property to
     ...
   ]
 ```
+
+# Hidden and Logic Evaluation Steps
+
+The goal of conditional logic evaluation is to determine if an item needs to be displayed or hidden based on a set of conditions. 
+
+Item’s passed to the library will either have `hidden: true` by default (representing hidden items) or `hidden: false|undefined` by default (representing shown items). The library will evaluate the item’s logic (if present) to determine if the value of the hidden property should be changed or left the same.
+
+Below are the steps used to determine if we should show or hide items after evaluating their logic. The show or hide action is determined by the `item.logic.action` property. 
+
+## Hidden Items (`hidden: true`)
+
+Below are the steps used to determine if we should change the hidden property to show the item (`hidden: false`) or leave an item hidden (`hidden: true`). 
+
+- **Step 1:** Is there only one item in the array of items?
+    - **Yes** - Item will be shown (`hidden: false`). Skips all other steps.
+    - **No** - Continue to step 2.
+- **Step 2:** Is there valid logic on this item?
+    - **Yes** - Continue to step 3
+    - **No** - Leave item hidden (`hidden: true`). Skip all other steps.
+- **Step 3:** Does the logic for this item have a show action (`logic.action === 'show'`)
+    - **Yes** - Continue to step 4.
+    - **No -** Leave item hidden (`hidden: true`). Skip all other steps.
+- **Step 4:** Evaluate logic conditions
+
+## Shown Items (`hidden: false|undefined`)
+
+Below are the steps used to determine if we should change the hidden property to hide the item (`hidden: true`) or leave an item shown (`hidden: false`). 
+
+- **Step 1:** Is there only one item in the array of items?
+    - **Yes** - Item will be shown (`hidden: false`). Skips all other steps.
+    - **No** - Continue to step 2.
+- **Step 2:** Is there valid logic on this item?
+    - **Yes** - Continue to step 3
+    - **No** - Leave item shown (`hidden: false`). Skip all other steps.
+- **Step 3:** Does the logic for this item have a hide action (`logic.action === 'hide'`)
+    - **Yes** - Continue to step 4.
+    - **No -** Leave item shown (`hidden: false`). Skip all other steps.
+- **Step 4:** Evaluate logic conditions
+
+
