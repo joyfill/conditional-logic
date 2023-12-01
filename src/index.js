@@ -32,8 +32,8 @@ export const applyLogic = (items, fields, fieldLookupKey) => {
     const hasLogic = (item.logic && item.logic.action && item.logic.eval && item.logic.conditions && item.logic.conditions.length > 0);
 
     /**
-     * Step 1: Prevent hidden items if only one item exists
-     * - If only one item exists then we do not want to hide it so we need to ensure hidden is false.
+     * Step 1: Show item (prevent hidden) if only one item exists
+     * - If only one item exists then we do not want to hide the item so we need to ensure hidden is false.
      */
     if (items.length < 2) {
 
@@ -43,31 +43,26 @@ export const applyLogic = (items, fields, fieldLookupKey) => {
     } 
 
     /**
-     * Step 2: No logic exists and item is not hidden
-     * - If item is not hidden and no logic exists then the item should be visible.
+     * Step 2: No logic exists
+     * - If no logic exists for the item then we should simply leave it as is
      */
-    else if (!hasLogic && !item.hidden) {
+    else if (!hasLogic) {
       return nextItem;
     }
 
     /**
-     * Step 3: No logic exists and item is hidden
-     * - If item is hidden and no logic exists to show the item then the item should not be visible.
-     */
-    else if (!hasLogic && item.hidden) {
-      return nextItem;
-    } 
-
-    /**
-     * Step 4: Has logic, item is hidden, and logic.action is not show
+     * Step 3: Has logic and has proper logic action paired with hidden status
      * - If item is hidden and the logic that exists does not have a "show" action then we simply leave the item hidden.
+     * - If item is shown and the logic that exists does not have a "hide" action then we simply leave the item shown.
      */
-    else if (hasLogic && item.hidden && item.logic.action !== LogicConstants.actions.show) {
+    else if (hasLogic 
+      && ((item.hidden && item.logic.action !== LogicConstants.actions.show) || (!item.hidden && item.logic.action !== LogicConstants.actions.hide))
+    ) {
       return nextItem;
     }
 
     /**
-     * Step 5: Evaluate logic condition
+     * Step 4: Evaluate logic condition
      */ 
     const matchingConditions = [];
     const validConditions = item.logic.conditions.filter((condition) => {
