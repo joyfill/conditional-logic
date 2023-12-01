@@ -8,12 +8,15 @@
 
 Joyfill is a forms platform with APIs and SDKs built to take the burden of building form and pdf solutions off of developers and product teams. Our Embeddable Form SDKs for JS, Angular, Vue, React, React-Native, etc. utilize this library to handle the visibility evaluation logic for fields and pages. We have open sourced this library to enable other developers to utilize the same conditional logic we use. Enjoy!
 
+# Overview
+
+The goal of conditional logic evaluation is to determine if an item needs to be displayed or hidden based on a set of conditions.
+
+Item’s passed to the library will either have hidden: true by default (representing hidden items) or hidden: false|undefined by default (representing shown items). The library will evaluate the item’s logic (if present) to determine if the value of the hidden property should be changed or left the same.
+
 
 # Usage
 
----
-
-In most cases when using this library the fields argument and items argument will be same array of objects. Why is this? This is because when you’re talking about conditional logic for forms the conditions to show or hide fields will be determined by the other field values on the form. For instance, show field B when field A has the proper value entered into it. In the example below I split the arrays into two for readability.
 
 ```jsx
 import { applyLogic } from "@joyfill/conditional-logic";
@@ -55,6 +58,9 @@ console.log(evaluatedItems[0].hidden);
  */
 
 ```
+
+In most cases when using this library the fields argument and items argument will be same array of objects. Why is this? This is because when you’re talking about conditional logic for forms the conditions to show or hide fields will be determined by the other field values on the form. For instance, show field B when field A has the proper value entered into it. In the example below I split the arrays into two for readability.
+
 
 # Available Methods
 
