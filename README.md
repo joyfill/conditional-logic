@@ -17,6 +17,8 @@ Item’s passed to the library will either have hidden: true by default (represe
 
 # Usage
 
+`yarn add @joyfill/conditional-logic` or `npm install --save @joyfill/conditional-logic`
+
 
 ```jsx
 import { applyLogic } from "@joyfill/conditional-logic";
